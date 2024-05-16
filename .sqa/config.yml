@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/edanya-uma/Tsunami-HySEA:
+      branch: main
+      repo: https://github.com/edanya-uma/Tsunami-HySEA
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/edanya-uma/Tsunami-HySEA git:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-tomato-sheep.sh
+        container: qc.acc_fuzzy-celadon-fossa
+  QC.Doc:
+    repos:
+      github.com/edanya-uma/Tsunami-HySEA find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.chummy-purple-owl.sh
+        container: qc.doc_chewy-purple-wolf
+      github.com/edanya-uma/Tsunami-HySEA git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-pear-tetra.sh
+        container: qc.doc_muzzy-brown-uakari
+      github.com/edanya-uma/Tsunami-HySEA markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.leaky-cerise-bonobo.sh
+        container: qc.doc_snippy-apricot-lemur
+  QC.Lic:
+    repos:
+      github.com/edanya-uma/Tsunami-HySEA licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-burgundy-grasshopper.sh
+        container: qc.lic_sloppy-grey-magpie
+  QC.Met:
+    repos:
+      github.com/edanya-uma/Tsunami-HySEA cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-ruby-robin.sh
+        container: qc.met_craggy-olive-urchin
+  QC.Ver:
+    repos:
+      github.com/edanya-uma/Tsunami-HySEA get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.scummy-lime-woodpecker.sh
+        container: qc.ver_droopy-beige-ibis
+timeout: 5400
